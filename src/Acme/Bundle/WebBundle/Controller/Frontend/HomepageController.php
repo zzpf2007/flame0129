@@ -26,6 +26,9 @@ class HomepageController extends Controller
    */
   public function mainAction()
   {
+    // var_dump($this->container->has('acme.repository.product'));
+
+    // var_dump($products = $this->getDoctrine()->getRepository('Acme\Component\Product\Model\Product')->findAll());
     return $this->render('AcmeWebBundle:Frontend/Homepage:main.html.twig');
   }
 

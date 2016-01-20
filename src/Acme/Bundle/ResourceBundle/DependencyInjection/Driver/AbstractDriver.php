@@ -106,7 +106,7 @@ abstract class AbstractDriver implements DriverInterface
         $definition = new Definition($metadata->getClass('controller'));
         // var_dump($metadata->getClass('controller'));        
         $definition
-            // ->setArguments(array($configurationDefinition))
+            ->setArguments(array($configurationDefinition))
             ->addMethodCall('setContainer', array(new Reference('service_container')))
         ;
 

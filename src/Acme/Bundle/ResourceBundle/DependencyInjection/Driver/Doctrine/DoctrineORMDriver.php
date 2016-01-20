@@ -11,12 +11,12 @@
 
 namespace Acme\Bundle\ResourceBundle\DependencyInjection\Driver\Doctrine;
 
-// use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Acme\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 // use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-// use Sylius\Bundle\TranslationBundle\Doctrine\ORM\TranslatableResourceRepository;
+// use Acme\Bundle\TranslationBundle\Doctrine\ORM\TranslatableResourceRepository;
 use Acme\Component\Resource\Metadata\MetadataInterface;
-// use Sylius\Component\Translation\Model\TranslatableInterface;
-// use Sylius\Component\Translation\Repository\TranslatableResourceRepositoryInterface;
+use Acme\Component\Translation\Model\TranslatableInterface;
+use Acme\Component\Translation\Repository\TranslatableResourceRepositoryInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
@@ -41,44 +41,45 @@ class DoctrineORMDriver extends AbstractDoctrineDriver
      */
     protected function addRepository(ContainerBuilder $container, MetadataInterface $metadata)
     {
-        // $reflection = new \ReflectionClass($metadata->getClass('model'));
+        $reflection = new \ReflectionClass($metadata->getClass('model'));
 
-        // $translatableInterface = TranslatableInterface::class;
-        // $translatable = interface_exists($translatableInterface) && $reflection->implementsInterface($translatableInterface);
+        $translatableInterface = TranslatableInterface::class;
+        $translatable = interface_exists($translatableInterface) && $reflection->implementsInterface($translatableInterface);
 
-        // $repositoryClassParameterName = sprintf('%s.repository.%s.class', $metadata->getApplicationName(), $metadata->getName());
+        $repositoryClassParameterName = sprintf('%s.repository.%s.class', $metadata->getApplicationName(), $metadata->getName());
         // $repositoryClass = $translatable
         //     ? TranslatableResourceRepository::class
         //     : EntityRepository::class
         // ;
+        $repositoryClass = EntityRepository::class;
 
-        // if ($container->hasParameter($repositoryClassParameterName)) {
-        //     $repositoryClass = $container->getParameter($repositoryClassParameterName);
-        // }
+        if ($container->hasParameter($repositoryClassParameterName)) {
+            $repositoryClass = $container->getParameter($repositoryClassParameterName);
+        }
 
-        // if ($metadata->hasClass('repository')) {
-        //     $repositoryClass = $metadata->getClass('repository');
-        // }
+        if ($metadata->hasClass('repository')) {
+            $repositoryClass = $metadata->getClass('repository');
+        }
 
-        // $definition = new Definition($repositoryClass);
-        // $definition->setArguments(array(
-        //     new Reference($metadata->getServiceId('manager')),
-        //     $this->getClassMetadataDefinition($metadata),
-        // ));
+        $definition = new Definition($repositoryClass);
+        $definition->setArguments(array(
+            new Reference($metadata->getServiceId('manager')),
+            $this->getClassMetadataDefinition($metadata),
+        ));
 
-        // if ($metadata->hasParameter('translation')) {
-        //     $repositoryReflection = new \ReflectionClass($repositoryClass);
-        //     $translatableRepositoryInterface = TranslatableResourceRepositoryInterface::class;
-        //     $translationConfig = $metadata->getParameter('translation');
+        if ($metadata->hasParameter('translation')) {
+            $repositoryReflection = new \ReflectionClass($repositoryClass);
+            $translatableRepositoryInterface = TranslatableResourceRepositoryInterface::class;
+            $translationConfig = $metadata->getParameter('translation');
 
-        //     if (interface_exists($translatableRepositoryInterface) && $repositoryReflection->implementsInterface($translatableRepositoryInterface)) {
-        //         if (isset($translationConfig['fields'])) {
-        //             $definition->addMethodCall('setTranslatableFields', array($translationConfig['fields']));
-        //         }
-        //     }
-        // }
+            if (interface_exists($translatableRepositoryInterface) && $repositoryReflection->implementsInterface($translatableRepositoryInterface)) {
+                if (isset($translationConfig['fields'])) {
+                    $definition->addMethodCall('setTranslatableFields', array($translationConfig['fields']));
+                }
+            }
+        }
 
-        // $container->setDefinition($metadata->getServiceId('repository'), $definition);
+        $container->setDefinition($metadata->getServiceId('repository'), $definition);
     }
 
     /**

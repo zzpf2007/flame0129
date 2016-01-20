@@ -3,6 +3,9 @@
 namespace Acme\Bundle\ProductBundle\DependencyInjection;
 
 use Acme\Bundle\ProductBundle\Controller\ProductController;
+use Acme\Component\Product\Model\Product;
+use Acme\Bundle\ResourceBundle\AcmeResourceBundle;
+use Acme\Component\Product\Model\ProductInterface;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
@@ -25,6 +28,13 @@ class Configuration implements ConfigurationInterface
         // Here you should define the parameters that are allowed to
         // configure your bundle. See the documentation linked above for
         // more information on that topic.
+
+        $rootNode
+            ->addDefaultsIfNotSet()
+            ->children()
+                ->scalarNode('driver')->defaultValue(AcmeResourceBundle::DRIVER_DOCTRINE_ORM)->end()
+            ->end()
+        ;
 
         $this->addResourcesSection($rootNode);
 
@@ -52,7 +62,9 @@ class Configuration implements ConfigurationInterface
                                     ->addDefaultsIfNotSet()
                                     ->children()
                                         ->scalarNode('model')->defaultValue(Product::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('controller')->defaultValue(ProductController::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('interface')->defaultValue(ProductInterface::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('controller')->defaultValue(ProductController::class)->cannotBeEmpty()->end()                                        
+                                        ->scalarNode('repository')->cannotBeEmpty()->end()
                                     ->end()
                                 ->end()
                             ->end()
