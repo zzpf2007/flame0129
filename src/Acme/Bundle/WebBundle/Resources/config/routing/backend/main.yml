@@ -1,0 +1,14 @@
+acme_backend_index:
+    path: /
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: acme_backend_dashboard
+        permanent: true
+
+acme_backend_dashboard:
+    path: /dashboard
+    defaults: { _controller: acme.controller.backend.dashboard:mainAction }
+
+acme_backend_customer:
+    resource: @AcmeWebBundle/Resources/config/routing/backend/customer.yml
+    prefix: /customers

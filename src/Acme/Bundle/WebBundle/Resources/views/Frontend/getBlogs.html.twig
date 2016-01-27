@@ -1,0 +1,11 @@
+<p>
+  get blogs html twig
+</p>
+
+Category: {{ category }}
+
+{% for item in blogs %}
+  <p>
+    {{ item.slug }}
+  </p>
+{% endfor %}

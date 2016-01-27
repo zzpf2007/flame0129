@@ -1,0 +1,6 @@
+# acme_user_homepage:
+#     path:     /
+#     defaults: { _controller: AcmeUserBundle:Default:index }
+
+
+# Refer to AcmeWebBundle/routing/backend/

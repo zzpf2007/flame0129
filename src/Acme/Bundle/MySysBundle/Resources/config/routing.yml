@@ -1,0 +1,8 @@
+acme_my_sys_homepage:
+    path:     /
+    defaults: { _controller: AcmeMySysBundle:Front:index }
+
+
+acme_my_sys_security:
+    resource: '@AcmeMySysBundle/Controller/'
+    type:     annotation

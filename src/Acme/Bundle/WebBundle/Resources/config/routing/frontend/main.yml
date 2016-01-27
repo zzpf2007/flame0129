@@ -1,0 +1,66 @@
+# This file is part of the Web package.
+
+acme_homepage:
+    path: /
+    defaults: { _controller: acme.controller.frontend.homepage:mainAction }
+
+acme_homepage_blogs:
+    path: /blogs
+    # defaults: { _controller: @AcmeWebBundle:Frontend:Product:getBlogsAction }
+    defaults: 
+      _controller: acme.controller.frontend.product:getBlogsAction
+      _koala:
+        template: AcmeWebBundle:Frontend:getBlogs.html.twig
+
+# sylius_currency:
+#     resource: @SyliusWebBundle/Resources/config/routing/frontend/currency.yml
+#     prefix: /currency
+
+# sylius_locale:
+#     resource: @SyliusWebBundle/Resources/config/routing/frontend/locale.yml
+#     prefix: /locale
+
+# sylius_static_content:
+#     resource: @SyliusWebBundle/Resources/config/routing/frontend/static_content.yml
+#     prefix: /content
+
+# sylius_checkout:
+#     resource: @SyliusWebBundle/Resources/config/routing/frontend/checkout.yml
+#     prefix: /checkout
+
+# sylius_account:
+#     resource: @SyliusWebBundle/Resources/config/routing/frontend/account.yml
+#     prefix: /account
+
+# sylius_user_account:
+#     resource: @SyliusUserBundle/Resources/config/routing/account.yml
+#     prefix: /account
+
+# sylius_cart:
+#     resource: @SyliusCartBundle/Resources/config/routing.yml
+#     prefix: /cart
+
+# sylius_cart_summary:
+#     path: /cart
+#     defaults:
+#         _controller: sylius.controller.cart:summaryAction
+#         _sylius:
+#             template: SyliusWebBundle:Frontend/Cart:summary.html.twig
+
+# sylius_cart_save:
+#     path: /cart/save
+#     defaults:
+#         _controller: sylius.controller.cart:saveAction
+#         _sylius:
+#             template: SyliusWebBundle:Frontend/Cart:summary.html.twig
+
+# sylius_contact:
+#     resource: @SyliusWebBundle/Resources/config/routing/frontend/contact.yml
+#     prefix: /contact
+
+# sylius_search:
+#     resource: @SyliusWebBundle/Resources/config/routing/frontend/search.yml
+#     prefix: /search
+
+# sylius_user:
+#     resource: @SyliusWebBundle/Resources/config/routing/frontend/user.yml

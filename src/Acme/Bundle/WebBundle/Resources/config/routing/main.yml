@@ -1,0 +1,13 @@
+# This file is part of the Web package.
+
+acme_frontend:
+    resource: @AcmeWebBundle/Resources/config/routing/frontend/main.yml
+
+acme_backend:
+    resource: @AcmeWebBundle/Resources/config/routing/backend/main.yml
+    prefix: /admin
+
+acme_partial:
+    resource: @AcmeWebBundle/Resources/config/routing/partial/main.yml
+    prefix: /_partial
+

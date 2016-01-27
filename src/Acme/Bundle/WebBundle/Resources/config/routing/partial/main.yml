@@ -1,0 +1,4 @@
+
+acme_product:
+    resource: @AcmeWebBundle/Resources/config/routing/partial/product.yml
+    prefix: /product

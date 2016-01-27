@@ -1,0 +1,12 @@
+{% extends 'AcmeWebBundle:Backend:layout.html.twig' %}
+
+{% from 'AcmeWebBundle:Backend/Customer:macros.html.twig' import list  %}
+
+{% block topbar %}
+{% endblock %}
+
+{% block content %}
+
+{{ list(customers)  }}
+
+{% endblock %}
