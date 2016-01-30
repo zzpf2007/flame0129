@@ -1,0 +1,27 @@
+# services:
+#    acme_resource.example:
+#        class: Acme\Bundle\ResourceBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]
+
+
+parameters:
+    acme.controller.class:                          Acme\Bundle\ResourceBundle\Controller\ResourceController
+    acme.expression_language.class:                 Acme\Bundle\ResourceBundle\ExpressionLanguage\ExpressionLanguage
+    acme.controller.parameters_parser.class:        Acme\Bundle\ResourceBundle\Controller\ParametersParser
+    acme.controller.configuration.class:            Acme\Bundle\ResourceBundle\Controller\Configuration
+    acme.controller.configuration_factory.class:    Acme\Bundle\ResourceBundle\Controller\ConfigurationFactory
+
+services:
+    acme.expression_language:
+      class:        '%acme.expression_language.class%'
+      calls:
+        - [setContainer, ['@service_container']]
+
+    acme.controller.parameters_parser:
+      class:        '%acme.controller.parameters_parser.class%'
+      arguments:    ['@acme.expression_language']
+
+
+    acme.controller.configuration_factory:
+      class:        '%acme.controller.configuration_factory.class%'
+      arguments:    ['@acme.controller.parameters_parser', '%acme.controller.configuration.class%', '%acme.resource.settings%']

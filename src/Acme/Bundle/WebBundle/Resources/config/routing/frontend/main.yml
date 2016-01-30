@@ -12,6 +12,10 @@ acme_homepage_blogs:
       _koala:
         template: AcmeWebBundle:Frontend:getBlogs.html.twig
 
+acme_homepage_test:
+  path: /test
+  defaults: { _controller: acme.controller.product:indexAction }
+
 # sylius_currency:
 #     resource: @SyliusWebBundle/Resources/config/routing/frontend/currency.yml
 #     prefix: /currency

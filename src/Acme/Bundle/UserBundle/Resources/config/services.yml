@@ -5,6 +5,7 @@
 
 parameters:
     acme.controller.customer.class: Acme\Bundle\UserBundle\Controller\CustomerController
+    # acme.controller.configuration.class : Acme\Bundle\ResourceBundle\Controller\Configuration
 
 services:
     acme.controller.customer:
