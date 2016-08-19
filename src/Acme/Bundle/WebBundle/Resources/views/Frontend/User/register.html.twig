@@ -1,0 +1,18 @@
+<form action="#" method="post" class="form-horizontal" >
+    <fieldset>
+        {{ form_errors(form) }}
+
+        {{ form_row(form.username) }}        
+
+        {# {{ form_row(form.firstName) }}
+        {{ form_row(form.lastName) }}
+        {{ form_row(form.email) }} #}
+        {# {{ form_row(form.user.plainPassword) }} #}
+
+        {{ form_rest(form) }}
+    </fieldset>
+
+    <button type="submit">
+        submit
+    </button>
+</form>

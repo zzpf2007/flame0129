@@ -32,6 +32,18 @@ abstract class AbstractDoctrineDriver extends AbstractDriver
     protected function getClassMetadataDefinition(MetadataInterface $metadata)
     {
         $definition = new Definition($this->getClassMetadataClassname());
+
+        // var_dump(array(new Reference($this->getManagerServiceId($metadata)), 'getClassMetadata'));
+        // echo "\nClass name: " . $this->getClassMetadataClassname() . "\n";
+
+        echo "\nGetClassMetadata: " . $this->getManagerServiceId($metadata) . "\n";
+        // $definition
+        //     ->setFactory(array(new Reference($this->getManagerServiceId($metadata)), 'getClassMetadata'))
+        //     ->setArguments(array($metadata->getClass('model')))
+        //     ->setPublic(false)
+        // ;
+        echo "\nModel: " . $metadata->getClass('model') . "\n";
+
         $definition
             ->setFactory(array(new Reference($this->getManagerServiceId($metadata)), 'getClassMetadata'))
             ->setArguments(array($metadata->getClass('model')))
@@ -46,10 +58,14 @@ abstract class AbstractDoctrineDriver extends AbstractDriver
      */
     protected function addManager(ContainerBuilder $container, MetadataInterface $metadata)
     {
+
+        echo "\nAdd manager: " . $this->getManagerServiceId($metadata) . "\n";
         $container->setAlias(
             $metadata->getServiceId('manager'),
             new Alias($this->getManagerServiceId($metadata))
         );
+
+        echo "\nManager alias: " . $metadata->getServiceId('manager') . "\n";
     }
 
     /**

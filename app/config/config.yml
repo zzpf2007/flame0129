@@ -8,9 +8,6 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
-    - { resource: "@AcmeIOTBundle/Resources/config/services.yml" }
-    - { resource: "@AcmeMySysBundle/Resources/config/services.yml" }
-    - { resource: "@AcmeUserBundle/Resources/config/services.yml" }
 
 # These are the configuration parameters that define the application's behavior
 # and which are independent from the underlying technical infrastructure
@@ -89,18 +86,42 @@ doctrine:
         # if using pdo_sqlite as your database driver, add the path in parameters.yml
         # e.g. database_path: "%kernel.root_dir%/data/data.db3"
         path:     "%database_path%"
-
     orm:
-        auto_generate_proxy_classes: "%kernel.debug%"
-        auto_mapping: true
+        auto_generate_proxy_classes: %kernel.debug%
+        entity_managers:
+            default:
+                auto_mapping: true
+                # mappings:
+                #     ProductBundle:
+                #         type: xml
+                #         dir : %kernel.root_dir%/../src/Acme/Bundle/ProductBundle/Resources/config/doctrine/model
+                #         prefix: Acme\Component\Product\Model
+                # mappings:
+                #     gedmo_loggable:
+                #         type: annotation
+                #         prefix: Gedmo\Loggable\Entity
+                #         dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Loggable/Entity"
+                #         is_bundle: false
+                # filters:
+                #     softdeleteable:
+                #         class: Gedmo\SoftDeleteable\Filter\SoftDeleteableFilter
+                #         enabled: true
+                # dql:
+                #     string_functions:
+                #         MATCH: Sylius\Bundle\SearchBundle\Extension\Doctrine\MatchAgainstFunction
 
 
 # Swiftmailer Configuration (used to send emails)
 swiftmailer:
-    transport: "%mailer_transport%"
-    host:      "%mailer_host%"
-    username:  "%mailer_user%"
-    password:  "%mailer_password%"
+    # transport: "%mailer_transport%"
+    # host:      "%mailer_host%"
+    # username:  "%mailer_user%"
+    # password:  "%mailer_password%"
+    transport: "smtp"
+    host:      "smtp.163.com"
+    port:      "25"
+    # username:  "tr_reuters@163.com"
+    # password:  "Passw0rd"
     spool:     { type: memory }
 
 # KnpPaginatorBundle configuration (used to paginate large result set)
@@ -108,3 +129,12 @@ knp_paginator:
     template:
         pagination: KnpPaginatorBundle:Pagination:twitter_bootstrap_v3_pagination.html.twig
 
+
+knp_menu:
+    # use "twig: false" to disable the Twig extension and the TwigRenderer
+    twig:
+        template: knp_menu.html.twig
+    #  if true, enables the helper for PHP templates
+    templating: false
+    # the renderer to use, list is also available by default
+    default_renderer: twig

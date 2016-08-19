@@ -19,4 +19,13 @@ class ProductController extends ResourceController
     //   // $test01->createConfiguration('acme', 'product', 'acme');
     //   return $this->render('AcmeProductBundle:Default:index.html.twig');
     // }
+
+    public function testAction(Request $request)
+    {
+        $repository = $this->getRepository();
+
+        $products = $repository->findAll();
+
+        echo count($products);
+    }
 }

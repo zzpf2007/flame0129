@@ -5,20 +5,30 @@
 
 
 parameters:
-    acme.controller.frontend.homepage.class: Acme\Bundle\WebBundle\Controller\Frontend\HomepageController
-    acme.controller.frontend.product.class: Acme\Bundle\WebBundle\Controller\Frontend\ProductController
-    acme.controller.backend.dashboard.class: Acme\Bundle\WebBundle\Controller\Backend\DashboardController
+    acme.controller.frontend.homepage.class : Acme\Bundle\WebBundle\Controller\Frontend\HomepageController
+    acme.controller.frontend.product.class  : Acme\Bundle\WebBundle\Controller\Frontend\ProductController
+    acme.controller.backend.dashboard.class : Acme\Bundle\WebBundle\Controller\Backend\DashboardController    
+    acme.menu.builder.class                 : Acme\Bundle\WebBundle\Menu\MenuBuilder
 
 services:
     acme.controller.frontend.homepage:
         class:        %acme.controller.frontend.homepage.class%
         calls:
           - [setContainer, ["@service_container"]]
+
     acme.controller.frontend.product:
         class:        %acme.controller.frontend.product.class%
         calls:
           - [setContainer, ["@service_container"]]
+          
     acme.controller.backend.dashboard:
         class:        %acme.controller.backend.dashboard.class%
         calls:
           - [setContainer, ["@service_container"]]
+
+    app.menu_builder:
+        class    : %acme.menu.builder.class%
+        arguments: ["@knp_menu.factory", "@acme.cart_provider"]
+        tags:
+            - { name: knp_menu.menu_builder, method: createMainMenu, alias: acme.front.main }
+

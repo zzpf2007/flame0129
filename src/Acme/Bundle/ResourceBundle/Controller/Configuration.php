@@ -270,6 +270,7 @@ class Configuration
 
     public function isPaginated()
     {
+        // var_dump($this->parameters->get('paginate', $this->settings['default_page_size']));
         return (bool) $this->parameters->get('paginate', $this->settings['default_page_size']);
     }
 

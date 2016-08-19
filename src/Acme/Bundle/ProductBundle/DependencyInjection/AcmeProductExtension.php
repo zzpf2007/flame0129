@@ -23,15 +23,16 @@ class AcmeProductExtension extends AbstractResourceExtension implements PrependE
     {
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
-        $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        // $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
-        var_dump($config);
+        // var_dump($config);
         // var_dump( $config['resources']['product']['classes']['controller'] );
 
-        $this->registerResources('acme', 'driver', $config['resources'], $container);
+        $this->registerResources('acme', $config['driver'], $config['resources'], $container);
 
         $configFiles = array(
-            'services.yml',
+            'services.xml',
         );
 
         foreach ($configFiles as $configFile) {

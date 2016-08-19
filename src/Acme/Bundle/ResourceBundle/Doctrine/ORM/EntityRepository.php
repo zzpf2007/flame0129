@@ -1,29 +1,15 @@
 <?php
 
-/*
- * This file is part of the Sylius package.
- *
- * (c) Paweł Jędrzejewski
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 namespace Acme\Bundle\ResourceBundle\Doctrine\ORM;
 
 use Doctrine\ORM\EntityRepository as BaseEntityRepository;
 use Doctrine\ORM\QueryBuilder;
-// use Pagerfanta\Adapter\ArrayAdapter;
-// use Pagerfanta\Adapter\DoctrineORMAdapter;
-// use Pagerfanta\Pagerfanta;
+use Pagerfanta\Adapter\ArrayAdapter;
+use Pagerfanta\Adapter\DoctrineORMAdapter;
+use Pagerfanta\Pagerfanta;
 use Acme\Component\Resource\Model\ResourceInterface;
 use Acme\Component\Resource\Repository\RepositoryInterface;
 
-/**
- * Doctrine ORM driver entity repository.
- *
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 class EntityRepository extends BaseEntityRepository implements RepositoryInterface
 {
     /**
@@ -139,7 +125,7 @@ class EntityRepository extends BaseEntityRepository implements RepositoryInterfa
      */
     public function getPaginator(QueryBuilder $queryBuilder)
     {
-        // return new Pagerfanta(new DoctrineORMAdapter($queryBuilder, true, true));
+        return new Pagerfanta(new DoctrineORMAdapter($queryBuilder, true, true));
     }
 
     /**
@@ -149,7 +135,7 @@ class EntityRepository extends BaseEntityRepository implements RepositoryInterfa
      */
     public function getArrayPaginator($objects)
     {
-        // return new Pagerfanta(new ArrayAdapter($objects));
+        return new Pagerfanta(new ArrayAdapter($objects));
     }
 
     /**

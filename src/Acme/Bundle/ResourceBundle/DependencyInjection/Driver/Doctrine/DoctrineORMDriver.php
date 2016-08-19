@@ -33,7 +33,7 @@ class DoctrineORMDriver extends AbstractDoctrineDriver
      */
     public function getType()
     {
-        // return SyliusResourceBundle::DRIVER_DOCTRINE_ORM;
+        return SyliusResourceBundle::DRIVER_DOCTRINE_ORM;
     }
 
     /**
@@ -47,6 +47,7 @@ class DoctrineORMDriver extends AbstractDoctrineDriver
         $translatable = interface_exists($translatableInterface) && $reflection->implementsInterface($translatableInterface);
 
         $repositoryClassParameterName = sprintf('%s.repository.%s.class', $metadata->getApplicationName(), $metadata->getName());
+        echo $repositoryClassParameterName;
         // $repositoryClass = $translatable
         //     ? TranslatableResourceRepository::class
         //     : EntityRepository::class
@@ -58,14 +59,20 @@ class DoctrineORMDriver extends AbstractDoctrineDriver
         }
 
         if ($metadata->hasClass('repository')) {
+            // echo "\nHas repository class";
             $repositoryClass = $metadata->getClass('repository');
+            // echo $repositoryClass . "\n";
         }
+
+        echo "\nRepository: " . $repositoryClass . "\n";
 
         $definition = new Definition($repositoryClass);
         $definition->setArguments(array(
             new Reference($metadata->getServiceId('manager')),
             $this->getClassMetadataDefinition($metadata),
         ));
+
+        echo "\nAdd Repository method: " . $metadata->getServiceId('manager') . "\n";
 
         if ($metadata->hasParameter('translation')) {
             $repositoryReflection = new \ReflectionClass($repositoryClass);
@@ -79,6 +86,8 @@ class DoctrineORMDriver extends AbstractDoctrineDriver
             }
         }
 
+        // echo "\n" . $metadata->getServiceId('repository') . "\n";
+
         $container->setDefinition($metadata->getServiceId('repository'), $definition);
     }
 
@@ -87,6 +96,7 @@ class DoctrineORMDriver extends AbstractDoctrineDriver
      */
     protected function getManagerServiceId(MetadataInterface $metadata)
     {
+        // return sprintf('doctrine.orm.entity_manager', $this->getObjectManagerName($metadata));
         return sprintf('doctrine.orm.%s_entity_manager', $this->getObjectManagerName($metadata));
     }
 

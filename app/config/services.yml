@@ -1,32 +1,32 @@
 services:
     # First we define some basic services to make these utilities available in
     # the entire application
-    slugger:
-        class: AppBundle\Utils\Slugger
+    # slugger:
+    #     class: AppBundle\Utils\Slugger
 
-    markdown:
-        class: AppBundle\Utils\Markdown
+    # markdown:
+    #     class: AppBundle\Utils\Markdown
 
-    # These are the Twig extensions that create new filters and functions for
-    # using them in the templates
-    app.twig.app_extension:
-        public:    false
-        class:     AppBundle\Twig\AppExtension
-        arguments: ['@markdown', %app_locales%]
-        tags:
-            - { name: twig.extension }
+    # # These are the Twig extensions that create new filters and functions for
+    # # using them in the templates
+    # app.twig.app_extension:
+    #     public:    false
+    #     class:     AppBundle\Twig\AppExtension
+    #     arguments: ['@markdown', %app_locales%]
+    #     tags:
+    #         - { name: twig.extension }
 
-    app.twig.intl_extension:
-        public: false
-        class:  Twig_Extensions_Extension_Intl
-        tags:
-            - { name: twig.extension }
+    # app.twig.intl_extension:
+    #     public: false
+    #     class:  Twig_Extensions_Extension_Intl
+    #     tags:
+    #         - { name: twig.extension }
 
-    app.redirect_to_preferred_locale_listener:
-        class: AppBundle\EventListener\RedirectToPreferredLocaleListener
-        arguments: ['@router', %app_locales%, %locale%]
-        tags:
-            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
+    # app.redirect_to_preferred_locale_listener:
+    #     class: AppBundle\EventListener\RedirectToPreferredLocaleListener
+    #     arguments: ['@router', %app_locales%, %locale%]
+    #     tags:
+    #         - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
 
     # Uncomment the following lines to define a service for the Post Doctrine repository.
     # It's not mandatory to create these services, but if you use repositories a lot,

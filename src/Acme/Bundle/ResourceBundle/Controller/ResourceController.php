@@ -133,14 +133,20 @@ class ResourceController extends FOSRestController
         $criteria = $this->config->getCriteria();
         $sorting = $this->config->getSorting();
 
+        // var_dump($criteria);
+
         $repository = $this->getRepository();
 
+        // var_dump($this->config->isPaginated());
+        // var_dump($this->config);
         if ($this->config->isPaginated()) {
             $resources = $this->resourceResolver->getResource(
                 $repository,
                 'createPaginator',
+                // 'findAll',
                 array($criteria, $sorting)
             );
+            // var_dump($resources);
             $resources->setCurrentPage($request->get('page', 1), true, true);
             $resources->setMaxPerPage($this->config->getPaginationMaxPerPage());
 
@@ -161,11 +167,12 @@ class ResourceController extends FOSRestController
             );
         }
 
-        $view = $this
-            ->view()
-            ->setTemplate($this->config->getTemplate('index.html'))
-            ->setTemplateVar($this->config->getPluralResourceName())
-            ->setData($resources)
+        // var_dump($this->config->getTemplate('index.html'));
+
+        $view = $this->view()
+                     ->setTemplate($this->config->getTemplate('index.html'))
+                     ->setTemplateVar($this->config->getPluralResourceName())
+                     ->setData($resources)
         ;
 
         return $this->handleView($view);

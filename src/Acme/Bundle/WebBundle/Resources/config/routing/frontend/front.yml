@@ -1,0 +1,9 @@
+acme_frontend_front_index:
+  path: /index
+  defaults: 
+    _controller: AcmeWebBundle:Frontend/Front:index
+
+acme_frontend_front_test01:
+  path: /test01
+  defaults: 
+    _controller: AcmeWebBundle:Frontend/Front:test01

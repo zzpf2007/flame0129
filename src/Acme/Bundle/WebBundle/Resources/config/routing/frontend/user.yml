@@ -1,0 +1,26 @@
+acme_user_index:
+  path: /index
+  defaults: 
+    _controller: acme.controller.user:indexAction
+    _koala:
+        template: AcmeWebBundle:Frontend/User:index.html.twig
+        paginate: 3
+
+acme_user_sendemail:
+    path: /sendemail
+    defaults:
+        _controller: acme.controller.user:sendemailAction
+        _koala:
+            template: AcmeWebBundle:Frontend/Emails:registration.html.twig
+
+acme_user_registration:
+    path: /register
+    methods: [GET, POST]
+    defaults:
+        _controller: acme.controller.user:createAction
+        _koala:
+            form: acme_user_registration
+            template: AcmeWebBundle:Frontend/User:register.html.twig
+            permission: false
+            redirect:
+                route: acme_user_index

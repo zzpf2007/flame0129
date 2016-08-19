@@ -1,4 +1,3 @@
-
 acme_partial_product_latest:
     path: /latest
     defaults:

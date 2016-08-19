@@ -12,6 +12,7 @@ namespace Acme\Bundle\WebBundle\Controller\Frontend;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Acme\Component\Product\Model\Product;
 
 /**
  * Frontend homepage controller.
@@ -43,6 +44,25 @@ class HomepageController extends Controller
 
     // $parameters = $request->get('template');
     // var_dump( $parameters );
+
+    $repo = $this->container->get("acme.repository.product");
+    // $repo = $this->container->get("qomo.repository.product");
+    // $em = $this->container->get("acme.mananger.product");
+
+    // $product = new Product();
+    // $em = $this->container->get('doctrine')->getManager();
+    // $em->persist($product);
+    // $em->flush();
+
+    if(!$repo) {
+      echo "error!";
+    }
+
+    $product = $repo->findAll();
+    // if($product){
+    //   echo "product!";
+    // }
+    echo count($product);
     
     $limit = 10;
     $template = $request->get('template');

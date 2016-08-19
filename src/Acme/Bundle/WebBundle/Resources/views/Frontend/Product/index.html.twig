@@ -1,0 +1,9 @@
+{% for item in products %}
+    <li>
+        {{ item.id }}
+    </li>
+{% endfor %}
+
+<p>
+    {{ pagerfanta(products) }}
+</p>

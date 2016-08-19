@@ -21,15 +21,14 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
-            new CodeExplorerBundle\CodeExplorerBundle(),
-            new AppBundle\AppBundle(),
-            new Acme\Bundle\IOTBundle\AcmeIOTBundle(),
-            new Acme\Bundle\MySysBundle\AcmeMySysBundle(),
             new Acme\Bundle\WebBundle\AcmeWebBundle(),
             new FOS\RestBundle\FOSRestBundle(),
-            new Acme\Bundle\UserBundle\AcmeUserBundle(),
             new Acme\Bundle\ProductBundle\AcmeProductBundle(),
             new Acme\Bundle\ResourceBundle\AcmeResourceBundle(),
+            new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
+            new Acme\Bundle\UserBundle\AcmeUserBundle(),
+            new Knp\Bundle\MenuBundle\KnpMenuBundle(),
+            new Acme\Bundle\CartBundle\AcmeCartBundle(),
         );
 
         // Some bundles are only used while developing the application or during

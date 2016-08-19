@@ -1,14 +1,5 @@
 <?php
 
-/*
- * This file is part of the Sylius package.
- *
- * (c) Paweł Jędrzejewski
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 namespace Acme\Component\Product\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -19,10 +10,6 @@ use Doctrine\Common\Collections\Collection;
 // use Sylius\Component\Variation\Model\OptionInterface as BaseOptionInterface;
 // use Sylius\Component\Variation\Model\VariantInterface as BaseVariantInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
- */
 // class Product extends AbstractTranslatable implements ProductInterface
 class Product
 {
@@ -83,7 +70,7 @@ class Product
 
     public function __construct()
     {
-        parent::__construct();
+        // parent::__construct();
         $this->availableOn = new \DateTime();
         // $this->attributes = new ArrayCollection();
         // $this->variants = new ArrayCollection();

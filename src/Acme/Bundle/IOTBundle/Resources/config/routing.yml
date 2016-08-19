@@ -1,3 +1,0 @@
-acme_iot_homepage:
-    path:     /
-    defaults: { _controller: AcmeIOTBundle:Default:index }

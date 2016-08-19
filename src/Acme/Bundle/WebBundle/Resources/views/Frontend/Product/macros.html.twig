@@ -5,7 +5,7 @@
     {% for product in products %}
         {% include 'AcmeWebBundle:Frontend/Product:_single.html.twig' %}
         {% if not loop.last %}<hr>{% endif %}
-        {% else %}
+        {# {% else %} #}
         {# {{ alerts.info('sylius.product.no_results'|trans) }} #}
     {% endfor %}
 

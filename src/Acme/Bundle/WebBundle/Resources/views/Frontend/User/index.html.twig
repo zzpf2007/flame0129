@@ -1,0 +1,9 @@
+{% for item in users %}
+    <li>
+        {{ item.id }} - {{ item.username }}
+    </li>
+{% endfor %}
+
+<p>
+    {{ pagerfanta(users) }}
+</p>

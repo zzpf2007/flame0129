@@ -7,9 +7,11 @@
 parameters:
     acme.controller.class:                          Acme\Bundle\ResourceBundle\Controller\ResourceController
     acme.expression_language.class:                 Acme\Bundle\ResourceBundle\ExpressionLanguage\ExpressionLanguage
+    acme.controller.parameters.class:               Acme\Bundle\ResourceBundle\Controller\Parameters
     acme.controller.parameters_parser.class:        Acme\Bundle\ResourceBundle\Controller\ParametersParser
     acme.controller.configuration.class:            Acme\Bundle\ResourceBundle\Controller\Configuration
     acme.controller.configuration_factory.class:    Acme\Bundle\ResourceBundle\Controller\ConfigurationFactory
+    acme.event_subscriber.kernel_controller.class:        Acme\Bundle\ResourceBundle\EventListener\KernelControllerSubscriber
 
 services:
     acme.expression_language:
@@ -21,7 +23,15 @@ services:
       class:        '%acme.controller.parameters_parser.class%'
       arguments:    ['@acme.expression_language']
 
+    acme.controller.parameters:
+      class:        '%acme.controller.parameters.class%'
 
     acme.controller.configuration_factory:
       class:        '%acme.controller.configuration_factory.class%'
       arguments:    ['@acme.controller.parameters_parser', '%acme.controller.configuration.class%', '%acme.resource.settings%']
+
+    acme.event_subscriber.kernel_controller:
+      class:        '%acme.event_subscriber.kernel_controller.class%'
+      arguments:    ['@acme.controller.parameters_parser', '@acme.controller.parameters', '%acme.resource.settings%']
+      tags:          
+        - { name: kernel.event_subscriber }

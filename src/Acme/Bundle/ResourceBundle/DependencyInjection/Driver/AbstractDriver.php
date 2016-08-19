@@ -56,19 +56,24 @@ abstract class AbstractDriver implements DriverInterface
      */
     protected function setClassesParameters(ContainerBuilder $container, MetadataInterface $metadata)
     {
+        echo "Set ClassesParameters";
         if ($metadata->hasClass('model')) {
             $container->setParameter(sprintf('%s.model.%s.class', $metadata->getApplicationName(), $metadata->getName()), $metadata->getClass('model'));
+            echo sprintf('%s.model.%s.class', $metadata->getApplicationName(), $metadata->getName());
         }
         if ($metadata->hasClass('controller')) {
             // var_dump( sprintf('%s.controller.%s.class', $metadata->getApplicationName(), $metadata->getName()) );
             // var_dump( $metadata->getClass('controller') );
             $container->setParameter(sprintf('%s.controller.%s.class', $metadata->getApplicationName(), $metadata->getName()), $metadata->getClass('controller'));
+            echo sprintf('%s.controller.%s.class', $metadata->getApplicationName(), $metadata->getName());
         }
         if ($metadata->hasClass('factory')) {
             $container->setParameter(sprintf('%s.factory.%s.class', $metadata->getApplicationName(), $metadata->getName()), $metadata->getClass('factory'));
+            echo sprintf('%s.factory.%s.class', $metadata->getApplicationName(), $metadata->getName());
         }
         if ($metadata->hasClass('repository')) {
             $container->setParameter(sprintf('%s.repository.%s.class', $metadata->getApplicationName(), $metadata->getName()), $metadata->getClass('repository'));
+            echo sprintf('%s.repository.%s.class', $metadata->getApplicationName(), $metadata->getName());
         }
 
         if (!$metadata->hasParameter('validation_groups')) {
@@ -132,7 +137,7 @@ abstract class AbstractDriver implements DriverInterface
             $decoratedDefinition = new Definition(Factory::class);
             $decoratedDefinition->setArguments(array($modelClass));
 
-            $definition->setArguments(array($decoratedDefinition, new Reference('sylius.translation.locale_provider')));
+            $definition->setArguments(array($decoratedDefinition, new Reference('acme.translation.locale_provider')));
 
             $container->setDefinition($metadata->getServiceId('factory'), $definition);
 
@@ -153,6 +158,8 @@ abstract class AbstractDriver implements DriverInterface
         foreach ($metadata->getClass('form') as $formName => $formClass) {
             $suffix = 'default' === $formName ? '' : sprintf('_%s', $formName);
             $alias = sprintf('%s_%s%s', $metadata->getApplicationName(), $metadata->getName(), $suffix);
+
+            echo "\nIamin addForms alias: " . $alias . "\n";
 
             $definition = new Definition($formClass);
 
@@ -187,7 +194,6 @@ abstract class AbstractDriver implements DriverInterface
                 sprintf('%s.form.type.%s%s', $metadata->getApplicationName(), $metadata->getName(), $suffix),
                 $definition
             );
-
         }
     }
 

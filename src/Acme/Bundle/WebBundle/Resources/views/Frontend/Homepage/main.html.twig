@@ -22,6 +22,8 @@
  #}
 {# {{ sonata_block_render({'name': '/cms/blocks/slideshow-home'}) }} #}
 
+{{ knp_menu_render('acme.front.main', {'template': 'AcmeWebBundle:Frontend:menu.html.twig'}) }}
+
 <p>Homepage Main action!</p>
 {{ render( url( 'acme_partial_product_latest', {'limit': 20, 'template': 'AcmeWebBundle:Frontend/Product:latest.html.twig'} )) }}
 {# {{ render(url('acme_partial_product_latest')) }} #}
