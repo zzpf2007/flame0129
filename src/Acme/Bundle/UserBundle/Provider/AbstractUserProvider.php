@@ -8,6 +8,8 @@
 namespace Acme\Bundle\UserBundle\Provider;
 
 use Acme\Component\User\Repository\UserRepositoryInterface;
+// use Acme\Component\User\Model\UserInterface as AcmeUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @author kevin.zhou <kevin.zhou@hotmail.co.uk>
@@ -15,6 +17,11 @@ use Acme\Component\User\Repository\UserRepositoryInterface;
 
 abstract class AbstractUserProvider implements UserProviderInterface
 {
+    /**
+     * @var string
+     */
+    // protected $supportedUserClass = UserInterface::class;
+
     /**
      * @var UserRepositoryInterface
      */
@@ -45,5 +52,22 @@ abstract class AbstractUserProvider implements UserProviderInterface
     /**
      * {@inheritDoc}
      */
+    public function refreshUser(UserInterface $user)
+    {
+
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     abstract protected function findUser($uniqueIdentifier);
+
+    /**
+     * {@inheritDoc}
+     */
+    public function supportsClass($class)
+    {
+        // return $this->supportedUserClass === $class || is_subclass_of($class, $this->supportedUserClass);
+        return true;
+    }
 }

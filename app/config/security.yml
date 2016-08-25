@@ -51,9 +51,9 @@
 
 security:
     providers:
-        acme_user_provider:
-            id: acme.user_provider.name_or_email
-            
+        in_memory:
+            memory: ~
+
     firewalls:
         default:
             anonymous: ~

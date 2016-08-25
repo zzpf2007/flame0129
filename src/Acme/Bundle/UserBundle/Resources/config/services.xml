@@ -13,4 +13,15 @@
         </service>
     </services>
     -->
+
+    <parameters>
+        <parameter key="acme.user_provider.name.class">Acme\Bundle\UserBundle\Provider\UsernameProvider</parameter>
+
+    </parameters>
+
+    <services>
+        <service id="acme.user_provider.name" class="%acme.user_provider.name.class%">
+            <argument type="service" id="acme.repository.user" />
+        </service>
+    </services>
 </container>

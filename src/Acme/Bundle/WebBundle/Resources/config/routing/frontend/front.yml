@@ -7,3 +7,8 @@ acme_frontend_front_test01:
   path: /test01
   defaults: 
     _controller: AcmeWebBundle:Frontend/Front:test01
+
+acme_frontend_front_test02:
+  path: /test02
+  defaults:
+    _controller: AcmeWebBundle:Frontend/Front:test02

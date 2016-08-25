@@ -121,6 +121,12 @@ class FrontController extends Controller
     // return $this->render('AcmeWebBundle:Frontend/Front:test01.html.twig');
   }
 
+  public function test02Action()
+  {
+    $user = $this->get('acme.user_provider.name')->findUser("test01");
+    Return new Response("Response with user: " . $user->getUsername());
+  }
+
   public function unicode_encode($str, $encoding = 'GBK', $prefix = '&#', $postfix = ';') {
     // $str = iconv($encoding, 'UCS-2', $str);
     $arrstr = str_split($str, 2);

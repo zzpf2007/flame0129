@@ -25,6 +25,10 @@ class AcmeUserExtension extends AbstractResourceExtension implements PrependExte
         $config = $this->processConfiguration($configuration, $configs);
 
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+
+        // echo $config_orm_file = sprintf('driver/%s.xml', $config['driver']);
+        $loader->load(sprintf('driver/%s.xml', $config['driver']));
+
         $this->registerResources('acme', $config['driver'], $config['resources'], $container);
         
         $configFiles = array(

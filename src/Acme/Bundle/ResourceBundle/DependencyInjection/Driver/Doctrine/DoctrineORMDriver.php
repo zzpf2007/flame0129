@@ -33,7 +33,7 @@ class DoctrineORMDriver extends AbstractDoctrineDriver
      */
     public function getType()
     {
-        return SyliusResourceBundle::DRIVER_DOCTRINE_ORM;
+        return AcmeResourceBundle::DRIVER_DOCTRINE_ORM;
     }
 
     /**
