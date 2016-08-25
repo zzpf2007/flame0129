@@ -6,16 +6,21 @@ use Knp\Menu\FactoryInterface;
 use Acme\Component\Cart\Provider\CartProviderInterface;
 // use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 // use Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 // class Builder implements ContainerAwareInterface
 class MenuBuilder
 {    
     private $factory;
 
-    public function __construct(FactoryInterface $factory, CartProviderInterface $cartProvider) 
+    public function __construct(FactoryInterface $factory, 
+                                AuthorizationCheckerInterface $authorizationChecker,
+                                CartProviderInterface $cartProvider
+                                )
     {
         $this->factory = $factory;
         $this->cartProvider = $cartProvider;
+        $this->authorizationChecker = $authorizationChecker;
     }
 
     public function createMainMenu(array $options)
@@ -48,6 +53,15 @@ class MenuBuilder
         
         // you can also add sub level's to your menu's as follows
         $menu['About Me']->addChild('Edit profile', array('route' => 'acme_homepage_test'));
+
+        if ($this->authorizationChecker->isGranted("ROLE_ADMINISTRATION_ACCESS")) {
+        // if (true) {
+            $routeParams = array(
+                                'route' => 'acme_homepage_test',
+                                'linkAttributes' => array('title' => 'Administrator')
+                                );
+            $menu->addChild('Administration', $routeParams); 
+        }
 
         // ... add more children
 

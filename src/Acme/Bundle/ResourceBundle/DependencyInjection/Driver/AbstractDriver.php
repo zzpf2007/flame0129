@@ -56,24 +56,24 @@ abstract class AbstractDriver implements DriverInterface
      */
     protected function setClassesParameters(ContainerBuilder $container, MetadataInterface $metadata)
     {
-        echo "Set ClassesParameters";
+        // echo "Set ClassesParameters";
         if ($metadata->hasClass('model')) {
             $container->setParameter(sprintf('%s.model.%s.class', $metadata->getApplicationName(), $metadata->getName()), $metadata->getClass('model'));
-            echo sprintf('%s.model.%s.class', $metadata->getApplicationName(), $metadata->getName());
+            // echo sprintf('%s.model.%s.class', $metadata->getApplicationName(), $metadata->getName());
         }
         if ($metadata->hasClass('controller')) {
             // var_dump( sprintf('%s.controller.%s.class', $metadata->getApplicationName(), $metadata->getName()) );
             // var_dump( $metadata->getClass('controller') );
             $container->setParameter(sprintf('%s.controller.%s.class', $metadata->getApplicationName(), $metadata->getName()), $metadata->getClass('controller'));
-            echo sprintf('%s.controller.%s.class', $metadata->getApplicationName(), $metadata->getName());
+            // echo sprintf('%s.controller.%s.class', $metadata->getApplicationName(), $metadata->getName());
         }
         if ($metadata->hasClass('factory')) {
             $container->setParameter(sprintf('%s.factory.%s.class', $metadata->getApplicationName(), $metadata->getName()), $metadata->getClass('factory'));
-            echo sprintf('%s.factory.%s.class', $metadata->getApplicationName(), $metadata->getName());
+            // echo sprintf('%s.factory.%s.class', $metadata->getApplicationName(), $metadata->getName());
         }
         if ($metadata->hasClass('repository')) {
             $container->setParameter(sprintf('%s.repository.%s.class', $metadata->getApplicationName(), $metadata->getName()), $metadata->getClass('repository'));
-            echo sprintf('%s.repository.%s.class', $metadata->getApplicationName(), $metadata->getName());
+            // echo sprintf('%s.repository.%s.class', $metadata->getApplicationName(), $metadata->getName());
         }
 
         if (!$metadata->hasParameter('validation_groups')) {
@@ -159,7 +159,7 @@ abstract class AbstractDriver implements DriverInterface
             $suffix = 'default' === $formName ? '' : sprintf('_%s', $formName);
             $alias = sprintf('%s_%s%s', $metadata->getApplicationName(), $metadata->getName(), $suffix);
 
-            echo "\nIamin addForms alias: " . $alias . "\n";
+            // echo "\nIamin addForms alias: " . $alias . "\n";
 
             $definition = new Definition($formClass);
 

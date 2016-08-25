@@ -28,7 +28,7 @@ services:
 
     app.menu_builder:
         class    : %acme.menu.builder.class%
-        arguments: ["@knp_menu.factory", "@acme.cart_provider"]
+        arguments: ["@knp_menu.factory", "@security.authorization_checker", "@acme.cart_provider"]
         tags:
             - { name: knp_menu.menu_builder, method: createMainMenu, alias: acme.front.main }
 

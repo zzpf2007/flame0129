@@ -47,3 +47,13 @@
 #         # additional security lives in the controllers
 #         - { path: ^/admin, roles: ROLE_ADMIN }
 #         - { path: ^/sys/access, roles: IS_AUTHENTICATED_FULLY }
+
+
+security:
+    providers:
+        acme_user_provider:
+            id: acme.user_provider.name_or_email
+            
+    firewalls:
+        default:
+            anonymous: ~

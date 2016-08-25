@@ -47,7 +47,7 @@ class DoctrineORMDriver extends AbstractDoctrineDriver
         $translatable = interface_exists($translatableInterface) && $reflection->implementsInterface($translatableInterface);
 
         $repositoryClassParameterName = sprintf('%s.repository.%s.class', $metadata->getApplicationName(), $metadata->getName());
-        echo $repositoryClassParameterName;
+        // echo $repositoryClassParameterName;
         // $repositoryClass = $translatable
         //     ? TranslatableResourceRepository::class
         //     : EntityRepository::class
@@ -64,7 +64,7 @@ class DoctrineORMDriver extends AbstractDoctrineDriver
             // echo $repositoryClass . "\n";
         }
 
-        echo "\nRepository: " . $repositoryClass . "\n";
+        // echo "\nRepository: " . $repositoryClass . "\n";
 
         $definition = new Definition($repositoryClass);
         $definition->setArguments(array(
@@ -72,7 +72,7 @@ class DoctrineORMDriver extends AbstractDoctrineDriver
             $this->getClassMetadataDefinition($metadata),
         ));
 
-        echo "\nAdd Repository method: " . $metadata->getServiceId('manager') . "\n";
+        // echo "\nAdd Repository method: " . $metadata->getServiceId('manager') . "\n";
 
         if ($metadata->hasParameter('translation')) {
             $repositoryReflection = new \ReflectionClass($repositoryClass);
