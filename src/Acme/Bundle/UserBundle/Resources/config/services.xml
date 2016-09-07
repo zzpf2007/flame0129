@@ -16,12 +16,41 @@
 
     <parameters>
         <parameter key="acme.user_provider.name.class">Acme\Bundle\UserBundle\Provider\UsernameProvider</parameter>
-
+        <parameter key="acme.controller.security.class">Acme\Bundle\UserBundle\Controller\SecurityController</parameter>
+        <parameter key="acme.form.type_user_login.class">Acme\Bundle\UserBundle\Form\Type\UserLoginType</parameter>
+        <parameter key="acme.security.authentication_utils.class">Acme\Bundle\UserBundle\Security\Authentication\AuthenticationUtils</parameter>
+        <parameter key="acme.user.password_encoder.class">Acme\Bundle\UserBundle\Security\UserPasswordEncoder</parameter>
+        <parameter key="acme.user.password_updater.class">Acme\Component\User\Security\PasswordUpdater</parameter>
+        <parameter key="acme.listener.password_updater.class">Acme\Bundle\UserBundle\EventListener\PasswordUpdaterListener</parameter>
     </parameters>
 
     <services>
         <service id="acme.user_provider.name" class="%acme.user_provider.name.class%">
             <argument type="service" id="acme.repository.user" />
+        </service>
+        <service id="acme.controller.security" class="%acme.controller.security.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+        <service id="acme.form.type.user_login" class="%acme.form.type_user_login.class%">
+            <tag name="form.type" alias="acme_user_security_login" />
+        </service>
+        <service id="security.authentication_utils" class="%acme.security.authentication_utils.class%">
+            <argument type="service" id="service_container" />
+        </service>
+        <service id="acme.user.password_encoder" class="%acme.user.password_encoder.class%">
+            <argument type="service" id="security.encoder_factory" />
+        </service>
+        <service id="acme.user.password_updater" class="%acme.user.password_updater.class%">
+            <argument type="service" id="acme.user.password_encoder" />
+        </service>
+        <service id="acme.listener.password_updater" class="%acme.listener.password_updater.class%">
+            <argument type="service" id="acme.user.password_updater" />
+            <tag name="kernel.event_listener" event="acme.user.pre_password_reset" method="genericEventUpdater" />
+            <tag name="kernel.event_listener" event="acme.user.pre_password_change" method="genericEventUpdater" />
+            <tag name="doctrine.event_listener" event="prePersist" />
+            <tag name="doctrine.event_listener" event="preUpdate" />
         </service>
     </services>
 </container>

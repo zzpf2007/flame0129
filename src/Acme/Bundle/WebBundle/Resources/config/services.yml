@@ -8,7 +8,7 @@ parameters:
     acme.controller.frontend.homepage.class : Acme\Bundle\WebBundle\Controller\Frontend\HomepageController
     acme.controller.frontend.product.class  : Acme\Bundle\WebBundle\Controller\Frontend\ProductController
     acme.controller.backend.dashboard.class : Acme\Bundle\WebBundle\Controller\Backend\DashboardController    
-    acme.menu.builder.class                 : Acme\Bundle\WebBundle\Menu\MenuBuilder
+    acme.menu.builder.class                 : Acme\Bundle\WebBundle\Menu\FrontendMenuBuilder
 
 services:
     acme.controller.frontend.homepage:
@@ -28,7 +28,7 @@ services:
 
     app.menu_builder:
         class    : %acme.menu.builder.class%
-        arguments: ["@knp_menu.factory", "@security.authorization_checker", "@acme.cart_provider"]
+        arguments: ["@knp_menu.factory", "@security.authorization_checker", "@translator", "@event_dispatcher", "@acme.cart_provider"]
         tags:
             - { name: knp_menu.menu_builder, method: createMainMenu, alias: acme.front.main }
 

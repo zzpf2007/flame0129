@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="koala.ui.login">
+                <source>koala.ui.login</source>
+                <target>登录</target>
+            </trans-unit>
+            <trans-unit id="koala.ui.register">
+                <source>koala.ui.register</source>
+                <target>注册</target>
+            </trans-unit>
+            <trans-unit id="koala.form.user.login">
+                <source>koala.form.user.login</source>
+                <target>用户登录</target>
+            </trans-unit>
+            <trans-unit id="koala.form.user.email">
+                <source>koala.form.user.email</source>
+                <target>邮箱</target>
+            </trans-unit>
+            <trans-unit id="koala.form.user.password.label">
+                <source>koala.form.user.password.label</source>
+                <target>密码</target>
+            </trans-unit>
+            <trans-unit id="koala.form.user.password.confirmation">
+                <source>koala.form.user.password.confirmation</source>
+                <target>再次输入密码</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

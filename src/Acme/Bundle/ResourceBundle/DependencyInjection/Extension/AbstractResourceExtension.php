@@ -25,16 +25,16 @@ abstract class AbstractResourceExtension extends Extension
      */
     protected function registerResources($applicationName, $driver, array $resources, ContainerBuilder $container)
     {
-        // $container->setParameter(sprintf('%s.driver.%s', $this->getAlias(), $driver), true);
-        // $container->setParameter(sprintf('%s.driver', $this->getAlias()), $driver);
+        $container->setParameter(sprintf('%s.driver.%s', $this->getAlias(), $driver), true);
+        $container->setParameter(sprintf('%s.driver', $this->getAlias()), $driver);
 
         foreach ($resources as $resourceName => $resourceConfig) {
             $alias = $applicationName.'.'.$resourceName;
-            // $resourceConfig = array_merge(array('driver' => $driver), $resourceConfig);
+            $resourceConfig = array_merge(array('driver' => $driver), $resourceConfig);
 
-            // $resources = $container->hasParameter('sylius.resources') ? $container->getParameter('sylius.resources') : array();
-            // $resources = array_merge($resources, array($alias => $resourceConfig));
-            // $container->setParameter('sylius.resources', $resources);
+            $resources = $container->hasParameter('acme.resources') ? $container->getParameter('acme.resources') : array();
+            $resources = array_merge($resources, array($alias => $resourceConfig));
+            $container->setParameter('acme.resources', $resources);
 
             // var_dump($resourceConfig);
 

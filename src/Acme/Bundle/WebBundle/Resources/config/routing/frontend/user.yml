@@ -24,3 +24,6 @@ acme_user_registration:
             permission: false
             redirect:
                 route: acme_user_index
+
+acme_login_path:
+    resource: @AcmeUserBundle/Resources/config/routing/security.yml

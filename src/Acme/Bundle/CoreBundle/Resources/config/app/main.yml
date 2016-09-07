@@ -1,0 +1,9 @@
+imports:
+    - { resource: @SyliusCoreBundle/Resources/config/app/acme.yml }
+
+# jms_serializer:
+#     metadata:
+#         directories:
+#             acme-user:
+#                 namespace_prefix: "Acme\\Component\\User"
+#                 path: "@AcmeUserBundle/Resources/config/serializer"

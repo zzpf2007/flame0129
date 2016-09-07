@@ -4,9 +4,10 @@ namespace Acme\Component\User\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Acme\Component\User\Model\UserInterface;
+use Symfony\Component\Security\Core\User\UserInterface as BaseUserInterface;
 
-// class User implements UserInterface
-class User
+class User implements UserInterface
 {
     /**
      * @var mixed
@@ -40,21 +41,21 @@ class User
     //  *
     //  * @var string
     //  */
-    // protected $salt;
+    protected $salt;
 
     // /**
     //  * Encrypted password. Must be persisted.
     //  *
     //  * @var string
     //  */
-    // protected $password;
+    protected $password;
 
     // /**
     //  * Password before encryption. Used for model validation. Must not be persisted.
     //  *
     //  * @var string
     //  */
-    // protected $plainPassword;
+    protected $plainPassword;
 
     // /**
     //  * @var \DateTime
@@ -93,7 +94,7 @@ class User
     //  *
     //  * @var array
     //  */
-    // protected $roles = array(UserInterface::DEFAULT_ROLE);
+    protected $roles = array(UserInterface::DEFAULT_ROLE);
 
     // /**
     //  * @var Collection
@@ -103,7 +104,7 @@ class User
     // /**
     //  * @var \DateTime
     //  */
-    // protected $createdAt;
+    protected $createdAt;
 
     // /**
     //  * @var \DateTime
@@ -115,12 +116,12 @@ class User
     //  */
     // protected $deletedAt;
 
-    // public function __construct()
-    // {
-    //     $this->salt = base_convert(sha1(uniqid(mt_rand(), true)), 16, 36);
+    public function __construct()
+    {
+        $this->salt = base_convert(sha1(uniqid(mt_rand(), true)), 16, 36);
     //     $this->oauthAccounts = new ArrayCollection();
-    //     $this->createdAt = new \DateTime();
-    // }
+        $this->createdAt = new \DateTime();
+    }
 
     /**
      * {@inheritdoc}
@@ -181,45 +182,45 @@ class User
     //     $this->usernameCanonical = $usernameCanonical;
     // }
 
-    // /**
-    //  * {@inheritdoc}
-    //  */
-    // public function getSalt()
-    // {
-    //     return $this->salt;
-    // }
+    /**
+     * {@inheritdoc}
+     */
+    public function getSalt()
+    {
+        return $this->salt;
+    }
 
-    // /**
-    //  * {@inheritdoc}
-    //  */
-    // public function getPlainPassword()
-    // {
-    //     return $this->plainPassword;
-    // }
+    /**
+     * {@inheritdoc}
+     */
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
 
-    // /**
-    //  * {@inheritdoc}
-    //  */
-    // public function setPlainPassword($password)
-    // {
-    //     $this->plainPassword = $password;
-    // }
+    /**
+     * {@inheritdoc}
+     */
+    public function setPlainPassword($password)
+    {
+        $this->plainPassword = $password;
+    }
 
-    // /**
-    //  * {@inheritdoc}
-    //  */
-    // public function getPassword()
-    // {
-    //     return $this->password;
-    // }
+    /**
+     * {@inheritdoc}
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
 
-    // /**
-    //  * {@inheritdoc}
-    //  */
-    // public function setPassword($password)
-    // {
-    //     $this->password = $password;
-    // }
+    /**
+     * {@inheritdoc}
+     */
+    public function setPassword($password)
+    {
+        $this->password = $password;
+    }
 
     // /**
     //  * {@inheritdoc}
@@ -333,55 +334,55 @@ class User
     //     return !$this->locked;
     // }
 
-    // /**
-    //  * {@inheritdoc}
-    //  */
-    // public function hasRole($role)
-    // {
-    //     return in_array(strtoupper($role), $this->getRoles(), true);
-    // }
+    /**
+     * {@inheritdoc}
+     */
+    public function hasRole($role)
+    {
+        return in_array(strtoupper($role), $this->getRoles(), true);
+    }
 
-    // /**
-    //  * {@inheritdoc}
-    //  */
-    // public function addRole($role)
-    // {
-    //     $role = strtoupper($role);
-    //     if (!in_array($role, $this->roles, true)) {
-    //         $this->roles[] = $role;
-    //     }
-    // }
+    /**
+     * {@inheritdoc}
+     */
+    public function addRole($role)
+    {
+        $role = strtoupper($role);
+        if (!in_array($role, $this->roles, true)) {
+            $this->roles[] = $role;
+        }
+    }
 
-    // /**
-    //  * {@inheritdoc}
-    //  */
-    // public function removeRole($role)
-    // {
-    //     if (false !== $key = array_search(strtoupper($role), $this->roles, true)) {
-    //         unset($this->roles[$key]);
-    //         $this->roles = array_values($this->roles);
-    //     }
-    // }
+    /**
+     * {@inheritdoc}
+     */
+    public function removeRole($role)
+    {
+        if (false !== $key = array_search(strtoupper($role), $this->roles, true)) {
+            unset($this->roles[$key]);
+            $this->roles = array_values($this->roles);
+        }
+    }
 
-    // /**
-    //  * {@inheritdoc}
-    //  */
-    // public function getRoles()
-    // {
-    //     return $this->roles;
-    // }
+    /**
+     * {@inheritdoc}
+     */
+    public function getRoles()
+    {
+        return $this->roles;
+    }
 
-    // /**
-    //  * {@inheritdoc}
-    //  */
-    // public function setRoles(array $roles)
-    // {
-    //     $this->roles = array();
+    /**
+     * {@inheritdoc}
+     */
+    public function setRoles(array $roles)
+    {
+        $this->roles = array();
 
-    //     foreach ($roles as $role) {
-    //         $this->addRole($role);
-    //     }
-    // }
+        foreach ($roles as $role) {
+            $this->addRole($role);
+        }
+    }
 
     // /**
     //  * {@inheritdoc}
@@ -441,13 +442,13 @@ class User
     //     $this->passwordRequestedAt = $date;
     // }
 
-    // /**
-    //  * {@inheritdoc}
-    //  */
-    // public function eraseCredentials()
-    // {
-    //     $this->plainPassword = null;
-    // }
+    /**
+     * {@inheritdoc}
+     */
+    public function eraseCredentials()
+    {
+        $this->plainPassword = null;
+    }
 
     // /**
     //  * {@inheritdoc}
@@ -488,21 +489,21 @@ class User
     //     }
     // }
 
-    // /**
-    //  * {@inheritdoc}
-    //  */
-    // public function getCreatedAt()
-    // {
-    //     return $this->createdAt;
-    // }
+    /**
+     * {@inheritdoc}
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
 
-    // /**
-    //  * {@inheritdoc}
-    //  */
-    // public function setCreatedAt(\DateTime $createdAt)
-    // {
-    //     $this->createdAt = $createdAt;
-    // }
+    /**
+     * {@inheritdoc}
+     */
+    public function setCreatedAt(\DateTime $createdAt)
+    {
+        $this->createdAt = $createdAt;
+    }
 
     // /**
     //  * {@inheritdoc}
@@ -544,54 +545,54 @@ class User
     //     return $this->hasExpired($this->deletedAt);
     // }
 
-    // /**
-    //  * Returns username.
-    //  *
-    //  * @return string
-    //  */
-    // public function __toString()
-    // {
-    //     return (string) $this->getUsername();
-    // }
+    /**
+     * Returns username.
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return (string) $this->getUsername();
+    }
 
-    // /**
-    //  * The serialized data have to contain the fields used by the equals method and the username.
-    //  *
-    //  * @return string
-    //  */
-    // public function serialize()
-    // {
-    //     return serialize(array(
-    //         $this->password,
-    //         $this->salt,
-    //         $this->usernameCanonical,
-    //         $this->username,
-    //         $this->locked,
-    //         $this->enabled,
-    //         $this->id,
-    //     ));
-    // }
+    /**
+     * The serialized data have to contain the fields used by the equals method and the username.
+     *
+     * @return string
+     */
+    public function serialize()
+    {
+        return serialize(array(
+            $this->password,
+            $this->salt,
+            // $this->usernameCanonical,
+            $this->username,
+            // $this->locked,
+            // $this->enabled,
+            $this->id,
+        ));
+    }
 
-    // /**
-    //  * @param string $serialized
-    //  */
-    // public function unserialize($serialized)
-    // {
-    //     $data = unserialize($serialized);
-    //     // add a few extra elements in the array to ensure that we have enough keys when unserializing
-    //     // older data which does not include all properties.
-    //     $data = array_merge($data, array_fill(0, 2, null));
+    /**
+     * @param string $serialized
+     */
+    public function unserialize($serialized)
+    {
+        $data = unserialize($serialized);
+        // add a few extra elements in the array to ensure that we have enough keys when unserializing
+        // older data which does not include all properties.
+        // $data = array_merge($data, array_fill(0, 2, null));
 
-    //     list(
-    //         $this->password,
-    //         $this->salt,
-    //         $this->usernameCanonical,
-    //         $this->username,
-    //         $this->locked,
-    //         $this->enabled,
-    //         $this->id
-    //         ) = $data;
-    // }
+        list(
+            $this->password,
+            $this->salt,
+            // $this->usernameCanonical,
+            $this->username,
+            // $this->locked,
+            // $this->enabled,
+            $this->id
+            ) = $data;
+    }
 
     // /**
     //  * @param CustomerInterface $customer
@@ -610,4 +611,17 @@ class User
     // {
     //     return (null !== $date) && ((new \DateTime()) >= $date);
     // }
+
+    /**
+     * @inheritDoc
+     */
+    // public function equals(UserInterface $user)
+    // {
+    //     return $this->username === $user->getUsername();
+    // }
+
+    public function isEqualTo(BaseUserInterface $user)
+    {
+        return true;
+    }
 }

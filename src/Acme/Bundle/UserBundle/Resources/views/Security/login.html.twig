@@ -1,0 +1,26 @@
+<p>
+    {{ 'koala.form.user.login'|trans }}
+    {# {{ 'title.source_code'|trans }} #}
+</p>
+
+{% if error %}
+    <div>
+        {{ error.messageKey|trans(error.messageData, 'security') }}
+    </div>
+{% endif %}
+
+
+<form action="{{ path('acme_user_security_check') }}" method="POST" >
+    <fieldset>
+        {{ form_errors(form) }}
+
+        {{ form_row(form._username) }}
+        {{ form_row(form._password) }}
+        {# {{ form_rest(form) }} #}
+    </fieldset>
+
+    <button type="submit">
+        {{ 'koala.ui.login'|trans }}
+    </button>
+</form>
+

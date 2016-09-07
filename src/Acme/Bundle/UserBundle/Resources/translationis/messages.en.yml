@@ -1,0 +1,7 @@
+koala:
+    form:
+        user:
+            email: Email
+            password:
+                label: Password
+                confirmation: Verification

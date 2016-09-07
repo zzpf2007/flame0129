@@ -13,14 +13,14 @@ class UserRegistrationType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('username')
-            // ->add('plainPassword', 'repeated', 
-            //         array(
-            //             'type'            => 'password',
-            //             'first_options'   => array('label' => 'acme.form.user.password.label'),
-            //             'second_options'  => array('label' => 'acme.form.user.password.confirmation'),
-            //             'invalid_message' => 'acme.user.plainPassword.mismatch',
-            // ))
+            ->add('username', 'text', array('label' => 'koala.form.user.email'))
+            ->add('plainPassword', 'repeated', 
+                    array(
+                        'type'            => 'password',
+                        'first_options'   => array('label' => 'koala.form.user.password.label'),
+                        'second_options'  => array('label' => 'koala.form.user.password.confirmation'),
+                        'invalid_message' => 'koala.user.plainPassword.mismatch',
+            ))
         ;
     }
 

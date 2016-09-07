@@ -11,9 +11,9 @@
 
 namespace Acme\Bundle\ResourceBundle\DependencyInjection\Driver;
 
-// use Acme\Component\Resource\Factory\Factory;
+use Acme\Component\Resource\Factory\Factory;
 use Acme\Component\Resource\Metadata\MetadataInterface;
-// use Acme\Component\Translation\Factory\TranslatableFactoryInterface;
+use Acme\Component\Translation\Factory\TranslatableFactoryInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Parameter;

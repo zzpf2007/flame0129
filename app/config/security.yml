@@ -1,3 +1,31 @@
+security:
+    providers:
+        acme_user_provider:
+            # class: Acme\Bundle\UserBundle\Security\User\WebserviceUserProvider
+            id: acme.user_provider.name
+            # id: app.webservice_user_provider
+    encoders:
+        # Acme\Bundle\UserBundle\Security\User\WebserviceUser: plaintext
+        Acme\Component\User\Model\UserInterface: sha512
+        # Acme\Component\User\Model\UserInterface: plaintext
+        # Acme\Component\User\Model\User: sha512
+    firewalls:
+        main:
+            context: user
+            pattern: /.*
+            form_login:
+                provider: acme_user_provider
+                login_path: /user/login
+                check_path: /user/login
+                failure_path: /user/login
+                default_target_path: /
+            logout: 
+                path: /user/logout
+            anonymous: true
+    access_control:
+        - { path: ^/sys/access, roles: IS_AUTHENTICATED_FULLY }
+
+
 # security:
 #     # encoders:
 #         # Our user class and the algorithm we'll use to encode passwords
@@ -49,11 +77,27 @@
 #         - { path: ^/sys/access, roles: IS_AUTHENTICATED_FULLY }
 
 
-security:
-    providers:
-        in_memory:
-            memory: ~
+# security:
+#     providers:
+#         in_memory:
+#             memory:
+#                 users:
+#                     ryan:
+#                         password: ryanpass
+#                         roles: 'ROLE_USER'
+#                     admin:
+#                         password: kitten
+#                         roles: 'ROLE_ADMIN'
+#     encoders:
+#         Symfony\Component\Security\Core\User\User: plaintext
 
-    firewalls:
-        default:
-            anonymous: ~
+#     firewalls:
+#         # ...
+#         default:
+#             anonymous: ~
+#             http_basic: ~
+#     access_control:
+#         # require ROLE_ADMIN for /admin*
+#         - { path: ^/admin, roles: ROLE_ADMIN }
+
+

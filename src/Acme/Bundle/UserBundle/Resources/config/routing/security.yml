@@ -1,0 +1,17 @@
+acme_user_security_login:
+    path: /login
+    methods: [GET]
+    defaults:
+        _controller: acme.controller.security:loginAction
+
+acme_user_security_check:
+    path: /login
+    methods: [POST]
+    defaults:
+        _controller: acme.controller.security:checkAction
+
+acme_user_security_logout:
+    path: /logout
+    methods: [GET, POST]
+    defaults:
+        _controller: acme.controller.security:logoutAction

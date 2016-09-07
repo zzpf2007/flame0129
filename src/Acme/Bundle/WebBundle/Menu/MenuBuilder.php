@@ -1,70 +1,100 @@
 <?php
-// Acme/Bundle/WebBundle/Menu/Builder.php
+
 namespace Acme\Bundle\WebBundle\Menu;
 
 use Knp\Menu\FactoryInterface;
-use Acme\Component\Cart\Provider\CartProviderInterface;
-// use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-// use Symfony\Component\DependencyInjection\ContainerAwareTrait;
+// use Acme\Component\Rbac\Authorization\AuthorizationCheckerInterface as RbacAuthorizationCheckerInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 
-// class Builder implements ContainerAwareInterface
-class MenuBuilder
-{    
-    private $factory;
+/**
+ * Abstract menu builder.
+ *
+ */
+abstract class MenuBuilder
+{
+    /**
+     * Menu factory.
+     *
+     * @var FactoryInterface
+     */
+    protected $factory;
 
-    public function __construct(FactoryInterface $factory, 
-                                AuthorizationCheckerInterface $authorizationChecker,
-                                CartProviderInterface $cartProvider
-                                )
-    {
+    /**
+     * Security context.
+     *
+     * @var AuthorizationCheckerInterface
+     */
+    protected $authorizationChecker;
+
+    /**
+     * Translator instance.
+     *
+     * @var TranslatorInterface
+     */
+    protected $translator;
+
+    /**
+     * Request.
+     *
+     * @var Request
+     */
+    protected $request;
+
+    /**
+     * @var EventDispatcherInterface
+     */
+    protected $eventDispatcher;
+
+    /**
+     * @var RbacAuthorizationCheckerInterface
+     */
+    protected $rbacAuthorizationChecker;
+
+    /**
+     * Constructor.
+     *
+     * @param FactoryInterface $factory
+     * @param AuthorizationCheckerInterface $authorizationChecker
+     * @param TranslatorInterface $translator
+     * @param EventDispatcherInterface $eventDispatcher
+     * @param RbacAuthorizationCheckerInterface $rbacAuthorizationChecker
+     */
+    public function __construct(
+        FactoryInterface $factory,
+        AuthorizationCheckerInterface $authorizationChecker,
+        TranslatorInterface $translator,
+        EventDispatcherInterface $eventDispatcher
+    ) {
         $this->factory = $factory;
-        $this->cartProvider = $cartProvider;
         $this->authorizationChecker = $authorizationChecker;
+        $this->translator = $translator;
+        $this->eventDispatcher = $eventDispatcher;
+        // $this->rbacAuthorizationChecker = $rbacAuthorizationChecker;
     }
 
-    public function createMainMenu(array $options)
+    /**
+     * Sets the request the service
+     *
+     * @param Request $request
+     */
+    public function setRequest(Request $request = null)
     {
-        $menu = $this->factory->createItem('root');
+        $this->request = $request;
+    }
 
-        $menu->addChild('Home', array('route' => 'acme_homepage_test'));
-
-        // access services from the container!
-        // $em = $this->container->get('doctrine')->getManager();
-        // // findMostRecent and Blog are just imaginary examples
-        // $blog = $em->getRepository('AppBundle:Blog')->findMostRecent();
-
-        $cartTotals = $this->cartProvider->getCart();
-
-        $menu->addChild('Cart', array('route' => 'acme_homepage_test'))
-             ->setLabel(sprintf('View cart (%s) $%s', $cartTotals['items'], $cartTotals['total']));
-
-        $menu->addChild('Latest Post', array(
-            'route' => 'acme_homepage_test',
-            'routeParameters' => array('id' => '1')
-        ));
-
-        // create another menu item
-        $menu->addChild('About Me', array(
-                            'route' => 'acme_homepage_test',
-                            'labelAttributes' => array('icon' => 'icon-user icon-large', 'iconOnly' => false)
-                            )
-                        );
-        
-        // you can also add sub level's to your menu's as follows
-        $menu['About Me']->addChild('Edit profile', array('route' => 'acme_homepage_test'));
-
-        if ($this->authorizationChecker->isGranted("ROLE_ADMINISTRATION_ACCESS")) {
-        // if (true) {
-            $routeParams = array(
-                                'route' => 'acme_homepage_test',
-                                'linkAttributes' => array('title' => 'Administrator')
-                                );
-            $menu->addChild('Administration', $routeParams); 
-        }
-
-        // ... add more children
-
-        return $menu;
+    /**
+     * Translate label.
+     *
+     * @param string $label
+     * @param array  $parameters
+     *
+     * @return string
+     */
+    protected function translate($label, $parameters = array())
+    {
+        return $this->translator->trans(/** @Ignore */ $label, $parameters, 'menu');
     }
 }

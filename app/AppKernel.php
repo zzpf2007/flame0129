@@ -29,6 +29,8 @@ class AppKernel extends Kernel
             new Acme\Bundle\UserBundle\AcmeUserBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new Acme\Bundle\CartBundle\AcmeCartBundle(),
+            new Acme\Bundle\RbacBundle\AcmeRbacBundle(),
+            new Acme\Bundle\CoreBundle\AcmeCoreBundle(),
         );
 
         // Some bundles are only used while developing the application or during

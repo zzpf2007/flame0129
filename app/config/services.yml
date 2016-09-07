@@ -1,4 +1,19 @@
 services:
+    # My services
+    my_service.logger:
+        class: Symfony\Bridge\Monolog\Logger
+        arguments: [app]
+        calls:
+          - [pushHandler, [@my_service.logger_handler]]
+
+    my_service.logger_handler:
+        class:  Monolog\Handler\StreamHandler
+        arguments: [%kernel.logs_dir%/%kernel.environment%_my.log]
+
+    app.webservice_user_provider:
+        class: Acme\Bundle\UserBundle\Security\User\WebserviceUserProvider
+        arguments: ['@service_container']
+
     # First we define some basic services to make these utilities available in
     # the entire application
     # slugger:

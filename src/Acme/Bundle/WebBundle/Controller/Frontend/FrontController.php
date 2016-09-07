@@ -123,8 +123,12 @@ class FrontController extends Controller
 
   public function test02Action()
   {
-    $user = $this->get('acme.user_provider.name')->findUser("test01");
-    Return new Response("Response with user: " . $user->getUsername());
+    // $user = $this->get('acme.user_provider.name')->findUser("test02");
+    $repo = $this->get('acme.repository.user');
+    $user = $repo->findOneBy(array("username" => "test02"));
+    // $authenticationUtils = $this->get('security.authentication_utils');
+    return new Response("Response with user: " . $user->getUsername());
+    // return new Response("Respnose with auth:" . $authenticationUtils->getLastUsername());
   }
 
   public function unicode_encode($str, $encoding = 'GBK', $prefix = '&#', $postfix = ';') {

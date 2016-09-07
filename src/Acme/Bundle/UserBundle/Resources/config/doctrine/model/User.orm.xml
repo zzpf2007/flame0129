@@ -10,6 +10,14 @@
         </id>
 
         <field name="username" column="username" type="string" nullable="true" />
+        <field name="password" column="password" type="string" nullable="false" />
+        
+        <field name="salt" column="salt" type="string" nullable="false" />
+        <field name="roles" column="roles" type="array" nullable="false" />
+
+        <field name="createdAt" column="created_at" type="datetime">
+            <gedmo:timestampable on="create"/>
+        </field>
         <!-- <field name="usernameCanonical" column="username_canonical" type="string" nullable="true" />
         <field name="enabled" column="enabled" type="boolean" nullable="false" />
         <field name="salt" column="salt" type="string" nullable="false" />
