@@ -25,7 +25,7 @@ class AcmeCoreExtension extends AbstractResourceExtension implements PrependExte
         $config = $this->processConfiguration($configuration, $configs);
 
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-        
+
         $this->registerResources('acme', $config['driver'], $config['resources'], $container);
 
         $configFiles = array(
@@ -35,5 +35,16 @@ class AcmeCoreExtension extends AbstractResourceExtension implements PrependExte
         foreach ($configFiles as $configFile) {
             $loader->load($configFile);
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function prepend(ContainerBuilder $container)
+    {
+        // $config = $this->processConfiguration(new Configuration(), $container->getExtensionConfig($this->getAlias()));
+
+        // $this->prependAttribute($container, $config);
+        // $this->prependVariation($container, $config);
     }
 }

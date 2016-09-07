@@ -4,6 +4,7 @@ namespace Acme\Bundle\CoreBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Acme\Bundle\ResourceBundle\AcmeResourceBundle;
+use Acme\Bundle\ResourceBundle\AbstractResourceBundle;
 
 class AcmeCoreBundle extends AbstractResourceBundle
 {
